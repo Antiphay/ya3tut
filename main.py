@@ -1,17 +1,19 @@
-from PyQt5 import QtWidgets, uic
-import sys
 import random
 import sqlite3
+import sys
+
+from PyQt5 import QtWidgets, uic
 from PyQt5.QtGui import QPainter, QColor
+
 
 class MyWindow(QtWidgets.QMainWindow):
     def __init__(self):
         super(MyWindow, self).__init__()
         self.form = None
-        uic.loadUi('UI.ui', self)
+        uic.loadUi('UI/UI.ui', self)
         self.pushButton.clicked.connect(self.draw_circle)
         self.addEditButton.clicked.connect(self.open_add_edit_form)
-        self.conn = sqlite3.connect('../ya3/coffee.db')
+        self.conn = sqlite3.connect('../ya3tut/Data/coffee.db')
         self.create_table()
 
     def create_table(self):
@@ -43,7 +45,7 @@ class MyWindow(QtWidgets.QMainWindow):
 class AddEditCoffeeForm(QtWidgets.QDialog):
     def __init__(self, conn):
         super(AddEditCoffeeForm, self).__init__()
-        uic.loadUi('addEditCoffeeForm.ui', self)
+        uic.loadUi('UI/addEditCoffeeForm.ui', self)
         self.conn = conn
         self.saveButton.clicked.connect(self.save_coffee)
 
